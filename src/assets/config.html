@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hardware</title>
+    <meta name="viewport" content="width=device-width,   initial-scale=1.0, user-scalable=0, minimal-ui"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootbox.min.js"></script>
+    <script type="text/javascript" src="js/notify.js"></script>
+
+    <link rel="stylesheet" href="bootstrap/package/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css" />
+    <link rel="stylesheet" href="fontawesome/css/fontawesome.min.css" />
+    <script type="text/javascript" src="bootstrap/package/dist/js/bootstrap.js"></script>
+
+    <script src="js/jquery-ui.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 offset-lg-4"><h3 style="width:100%; text-align:center;">Barcode Printing</h3></div>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <tbody>
+                <tr>
+                    <td>First Heading</td><td><input class="form-control" id="heading1" name="heading1" type="text" /></td>
+                    <td>Second Heading</td><td><input class="form-control" id="heading2" name="heading2" type="text" /></td>
+                </tr>
+
+                <tr>
+                    <td>Model Name</td><td><input class="form-control" id="modelname" name="modelname" type="text" /></td>
+                    <td>Size(Units)</td><td><input placeholder="Inch" class="form-control" id="sizeunits" name="sizeunits" type="text" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>Size Value</td><td><input class="form-control" placeholder="80X30X5" id="sizevalue" name="sizevalue" type="text" /></td>
+                    <td>Product Ref No</td><td><input class="form-control" id="productrefnum" name="productrefnum" type="text" placeholder="JFFD" /></td>
+                </tr>
+
+                <tr>
+                    <td>Product Code</td><td><input class="form-control" id="productcode" name="productcode" type="text" placeholder="BDEF" /></td>
+                    <td>Mfg Date</td><td><input class="form-control" id="manufacturingdate" name="manufacturingdate" type="text" placeholder="Sept 2017" /></td>
+                </tr>
+
+
+                <tr>
+                    <td>MRP</td><td><input class="form-control" id="mrp" name="mrp" type="text" placeholder="2000/-" /></td>
+
+                    <td>Barcode Text</td><td><input class="form-control" id="barcodetext" name="barcodetext" type="text" placeholder="DUAP7750" /></td>
+                </tr>
+
+                <tr>
+                    <td style="text-align:center;" colspan="4">
+                        <button class="btn btn-primary" onclick="javascript:printBarcodes();"><i class="fa fa-print"></i> Print</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+</body>
+
+<script language="JavaScript">
+var jsConnector = {
+    showResult: function (result) {
+        if(result == "printFinalReceipt")
+        {
+        								setTimeout(function(){
+							    			showPrintPopup();
+										},1000);
+
+        }
+        if(result == "finishedReport"){
+            retrieveReport();
+        }
+
+        if(result == ""){
+            retrieveReport();
+        }
+
+    }
+};
+function goback()
+{
+JSInterface.goToMenu();
+}
+
+function getJsConnector() {
+    return jsConnector;
+};
+</script>
+
+<script src="js/barcodeprinter.js"></script>
+</html>
