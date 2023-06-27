@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.web.WebView?>
+<ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="SecondaryDisplayPage">
+    <content>
+        <WebView fx:id="browser" layoutX="0" layoutY="0" pickOnBounds="true" />
+
+    </content>
+</ScrollPane>

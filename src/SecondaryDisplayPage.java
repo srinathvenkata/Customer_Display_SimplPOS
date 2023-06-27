@@ -19,17 +19,13 @@ import javafx.stage.Stage;
 import netscape.javascript.JSObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import java.awt.*;
-import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
-public class Launcher extends Application implements Initializable {
+public class SecondaryDisplayPage extends Application implements Initializable {
 
     private Screen screen;
     @FXML
@@ -49,9 +45,6 @@ public class Launcher extends Application implements Initializable {
     WebEngine engine;
     Preferences prefs = Preferences.userRoot();
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -60,7 +53,7 @@ public class Launcher extends Application implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         Parent root = null;
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("views/LauncherView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("views/SecondaryDisplayView.fxml"));
 //            root = loader.load(getClass().getClassLoader().getResource("views/AppointmentsScreen.fxml"));
             scene = new Scene(fxmlLoader.load(), 320, 240);
             primaryStage.setTitle("Hello!");
@@ -95,7 +88,6 @@ public class Launcher extends Application implements Initializable {
         browser.setMaxHeight(bounds.getHeight());
         browser.setPrefWidth(bounds.getWidth());
         displayWeb();
-        displayWebAPIAndNotifications();
     }
 
 
@@ -131,7 +123,7 @@ public class Launcher extends Application implements Initializable {
             }
         });
 
-        browser.getEngine().load(Launcher.class.getResource("assets/config.html").toString());
+        engine.load(prefs.get("simplpos_secondary_display_url",""));
 //        VBox box = new VBox(browser);
         Scene scene = new Scene(browser, Color.BLACK);
         browser.setStyle("-fx-background-color: black");
@@ -143,18 +135,7 @@ public class Launcher extends Application implements Initializable {
     }
 
 
-    public class ApiJSInterface{
-        public void  receivedNotificationForNewOrder()
-        {
-            System.out.println("Received the notification");
 
-            javascriptConnector.call("showResult", "notificationReceivedPopup");
-        }
-        public void receivedNotificationForBackgroundRefresh()
-        {
-
-        }
-    }
     public class JSInterface {
         public void showLog(String info) {
             System.out.println(info);
@@ -196,14 +177,6 @@ public class Launcher extends Application implements Initializable {
         public void goToSecondaryDisplayPage()
         {
             System.out.println("goToSecondaryDisplayPage called");
-            primaryStage = (Stage) browser.getScene().getWindow();
-
-            SecondaryDisplayPage mc = new SecondaryDisplayPage();
-            try {
-                mc.start(primaryStage);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
         }
         public String getAdvertisementsUrl()
@@ -211,8 +184,7 @@ public class Launcher extends Application implements Initializable {
             System.out.println("getAdvertisementsUrl() called");
             return prefs.get("simplpos_advertisements_display_url","");
         }
-
-            public void goToPOS(){
+        public void goToPOS(){
 
             /* primaryStage = (Stage) browser.getScene().getWindow();
 
