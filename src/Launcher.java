@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.web.WebEngine;
@@ -82,7 +83,8 @@ public class Launcher extends Application implements Initializable {
         primaryStage.getIcons().add(new Image(Launcher.class.getResourceAsStream("assets/images/icon.png")));
 
         primaryStage.setTitle("SimplPOS");
-
+        primaryStage.setFullScreen(true);
+        primaryStage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
     }
 
     @Override
